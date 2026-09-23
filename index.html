@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surat Keterangan Sakit Digital</title>
+    <title>Sistem Validasi Dokumen Medis - Klinik Medika Sehat</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f6;
-            color: #333;
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #eef2f5;
+            color: #111;
             margin: 0;
-            padding: 20px;
+            padding: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -18,106 +18,291 @@
         }
         .container {
             background-color: #ffffff;
-            max-width: 600px;
+            max-width: 650px;
             width: 100%;
             padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border-top: 8px solid #007bff;
+            border-radius: 4px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            position: relative;
+            box-sizing: border-box;
         }
-        .header {
-            text-align: center;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
+        /* Watermark Efek Resmi */
+        .container::before {
+            content: "+";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 280px;
+            color: rgba(0, 123, 255, 0.03);
+            font-family: Arial, sans-serif;
+            pointer-events: none;
+            z-index: 1;
         }
-        .header h1 {
+        /* Badge Verifikasi Digital */
+        .verification-badge {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-bottom: 25px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.2);
+        }
+        .verification-badge span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: #28a745;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 1.8s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(40, 167, 69, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
+        }
+        .kop-surat {
+            display: flex;
+            align-items: center;
+            border-bottom: 3px double #000;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 2;
+        }
+        .logo-klinik {
+            flex: 0 0 70px;
+            height: 70px;
+            border: 2px solid #0056b3;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+            color: #dc3545;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+            margin-right: 20px;
+            background-color: #fff;
+        }
+        .info-klinik {
+            flex: 1;
+        }
+        .info-klinik h2 {
             margin: 0;
-            font-size: 24px;
-            color: #007bff;
+            font-size: 22px;
+            color: #0056b3;
+            letter-spacing: 1px;
+            font-family: 'Arial Black', Gadget, sans-serif;
         }
-        .header p {
+        .info-klinik p {
+            margin: 4px 0 0 0;
+            font-size: 12px;
+            color: #444;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.3;
+        }
+        .judul-surat {
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 2;
+        }
+        .judul-surat h3 {
+            margin: 0;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        .judul-surat p {
             margin: 5px 0 0 0;
-            color: #666;
             font-size: 14px;
+            font-weight: bold;
         }
-        .content {
-            line-height: 1.6;
-            font-size: 16px;
+        .isi-surat {
+            line-height: 1.8;
+            font-size: 15px;
+            text-align: justify;
+            position: relative;
+            z-index: 2;
         }
-        .meta-info {
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-        .meta-info table {
-            width: 100%;
+        .tabel-pasien {
+            width: 90%;
+            margin: 20px auto;
             border-collapse: collapse;
         }
-        .meta-info td {
-            padding: 6px 0;
+        .tabel-pasien td {
+            padding: 4px 8px;
             vertical-align: top;
         }
-        .meta-info td.label {
-            width: 30%;
-            font-weight: bold;
-            color: #555;
+        .tabel-pasien td.label {
+            width: 35%;
         }
-        .footer {
+        .penutup {
+            margin-top: 20px;
+            text-indent: 30px;
+        }
+        .ttd-section {
             margin-top: 40px;
-            text-align: right;
+            display: flex;
+            justify-content: flex-end;
+            position: relative;
+            z-index: 2;
         }
-        .signature-space {
-            margin-top: 60px;
+        .ttd-box {
+            text-align: center;
+            width: 220px;
+        }
+        .ttd-box .tanggal {
+            margin-bottom: 5px;
+        }
+        .ttd-box .jabatan {
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        .area-tanda-tangan {
+            height: 75px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        /* Efek Stempel Klinik Resmi */
+        .stempel-klinik {
+            position: absolute;
+            width: 95px;
+            height: 95px;
+            border: 3px double rgba(0, 86, 179, 0.75);
+            border-radius: 50%;
+            color: rgba(0, 86, 179, 0.75);
+            font-family: Arial, sans-serif;
+            font-size: 9px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transform: rotate(-12deg);
+            left: -25px;
+            top: -10px;
+            pointer-events: none;
+            box-sizing: border-box;
+            box-shadow: inset 0 0 2px rgba(0, 86, 179, 0.5);
+        }
+        .stempel-inner {
+            border: 1px solid rgba(0, 86, 179, 0.75);
+            width: 79px;
+            height: 79px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            line-height: 1.1;
+        }
+        /* Efek Tanda Tangan Dokter */
+        .ttd-dokter {
+            font-family: 'Brush Script MT', cursive, sans-serif;
+            font-size: 32px;
+            color: #0b2265;
+            transform: rotate(-3deg);
+            user-select: none;
+        }
+        .nama-dokter {
+            font-weight: bold;
+            text-decoration: underline;
+            margin-bottom: 0;
+        }
+        .sip-dokter {
+            font-size: 13px;
+            color: #444;
+            margin-top: 2px;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-
-    <div class="header">
-        <h1>KLINIK MEDIKA SEHAT</h1>
-        <p>Jl. Kesehatan No. 123, Jakarta Selatan | Telp: (021) 555-1234</p>
+    
+    <!-- Sistem Validasi Digital -->
+    <div class="verification-badge">
+        <span></span> DOKUMEN DIGITAL TERVERIFIKASI ASLI & SAH | E-HEALTH SYSTEM V2.6
     </div>
 
-    <div class="content">
-        <h3 style="text-align: center; text-decoration: underline;">SURAT KETERANGAN SAKIT</h3>
-        
-        <p>Yang bertanda tangan di bawah ini menerangkan bahwa:</p>
-        
-        <div class="meta-info">
-            <table>
-                <tr>
-                    <td class="label">Nama</td>
-                    <td>: <span>Budi Santoso</span></td>
-                </tr>
-                <tr>
-                    <td class="label">Umur</td>
-                    <td>: <span>25 Tahun</span></td>
-                </tr>
-                <tr>
-                    <td class="label">Pekerjaan</td>
-                    <td>: <span>Karyawan Swasta</span></td>
-                </tr>
-            </table>
+    <!-- Kop Surat Medis -->
+    <div class="kop-surat">
+        <div class="logo-klinik">+</div>
+        <div class="info-klinik">
+            <h2>KLINIK MEDIKA SEHAT</h2>
+            <p>Izin Operasional Dinkes No: 445/1023-Dinkes/2024</p>
+            <p>Jl. Kesehatan Raya No. 123, Jakarta Selatan 12340</p>
+            <p>Telp: (021) 555-1234 | Email: info@medikasehatclinic.com</p>
         </div>
+    </div>
 
-        <p>
-            Berdasarkan hasil pemeriksaan yang telah dilakukan, pasien tersebut dalam keadaan kurang sehat sehingga memerlukan istirahat selama <strong>2 (dua) hari</strong>, terhitung mulai tanggal <strong>24 September 2026</strong> sampai dengan <strong>25 September 2026</strong>.
-        </p>
+    <!-- Judul Dokumen -->
+    <div class="judul-surat">
+        <h3>Surat Keterangan Sakit</h3>
+        <p>No: 440/B.023/KMS/IX/2026</p>
+    </div>
+
+    <!-- Isi Surat Medis -->
+    <div class="isi-surat">
+        <p>Yang bertanda tangan di bawah ini, Dokter Pemeriksa pada Klinik Medika Sehat Jakarta, menerangkan dengan sebenarnya berdasarkan hasil pemeriksaan fisik medis yang objektif bahwa:</p>
         
-        <p>
-            Demikian surat keterangan ini dibuat dengan sebenar-benarnya untuk dapat dipergunakan sebagaimana mestinya.
-        </p>
+        <table class="tabel-pasien">
+            <tr>
+                <td class="label">Nama Pasien</td>
+                <td>: <strong>Budi Santoso</strong></td>
+            </tr>
+            <tr>
+                <td class="label">Umur / Tgl Lahir</td>
+                <td>: 25 Tahun / 14 Agustus 2001</td>
+            </tr>
+            <tr>
+                <td class="label">Jenis Kelamin</td>
+                <td>: Laki-laki</td>
+            </tr>
+            <tr>
+                <td class="label">Pekerjaan / Instansi</td>
+                <td>: Karyawan Swasta / PT Maju Bersama</td>
+            </tr>
+        </table>
+
+        <p>Dinyatakan bahwa pasien tersebut di atas dalam kondisi **Kurang Sehat (Sakit)** sehingga memerlukan istirahat untuk pemulihan kesehatan selama <strong>2 (dua) hari</strong>, terhitung mulai tanggal <strong>24 September 2026</strong> sampai dengan tanggal <strong>25 September 2026</strong>.</p>
+        
+        <p class="penutup">Demikian surat keterangan sakit ini diterbitkan secara elektronik berdasarkan rekam medis pasien untuk dapat dipergunakan sebagaimana mestinya dan pihak berkepentingan dapat memverifikasi keabsahan dokumen ini melalui sistem pemindaian QR resmi.</p>
     </div>
 
-    <div class="footer">
-        <p>Jakarta, 23 September 2026</p>
-        <p style="margin-bottom: 0;">Dokter Pemeriksa,</p>
-        <div class="signature-space"></div>
-        <p style="font-weight: bold; text-decoration: underline;">dr. Ahmad Pratama</p>
-        <p style="font-size: 14px; color: #666; margin-top: -10px;">SIP. 123.456/2025</p>
+    <!-- Struktur Tanda Tangan & Stempel Digital -->
+    <div class="ttd-section">
+        <div class="ttd-box">
+            <p class="tanggal">Jakarta, 23 September 2026</p>
+            <p class="jabatan">Dokter Pemeriksa,</p>
+            
+            <div class="area-tanda-tangan">
+                <!-- Simulasi Stempel Klinik -->
+                <div class="stempel-klinik">
+                    <div class="stempel-inner">KLINIK<br>MEDIKA SEHAT<br>★ JAKARTA ★</div>
+                </div>
+                <!-- Simulasi Tanda Tangan dr -->
+                <div class="ttd-dokter">dr. A. Pratama</div>
+            </div>
+            
+            <p class="nama-dokter">dr. Ahmad Pratama</p>
+            <p class="sip-dokter">SIP: 123.456/DINKES/2025</p>
+        </div>
     </div>
+
 </div>
 
 </body>
