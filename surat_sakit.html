@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surat Keterangan Sakit Digital</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-top: 8px solid #007bff;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #007bff;
+        }
+        .header p {
+            margin: 5px 0 0 0;
+            color: #666;
+            font-size: 14px;
+        }
+        .content {
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        .editable {
+            border: 1px dashed transparent;
+            padding: 2px 5px;
+            transition: all 0.3s;
+        }
+        .editable:hover {
+            border-color: #007bff;
+            background-color: #f0f7ff;
+            cursor: pointer;
+        }
+        .editable:focus {
+            border-color: #007bff;
+            background-color: #fff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0,123,255,0.5);
+        }
+        .meta-info {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .meta-info table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .meta-info td {
+            padding: 6px 0;
+            vertical-align: top;
+        }
+        .meta-info td.label {
+            width: 30%;
+            font-weight: bold;
+            color: #555;
+        }
+        .footer {
+            margin-top: 40px;
+            text-align: right;
+        }
+        .signature-space {
+            margin-top: 60px;
+        }
+        .notice {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            border: 1px solid #ffeeba;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="notice">
+        <strong>💡 Tips Edit:</strong> Klik langsung pada teks mana saja di bawah ini untuk mengubah isinya sesuai kebutuhan Anda.
+    </div>
+
+    <div class="header">
+        <h1 class="editable" contenteditable="true">KLINIK MEDIKA SEHAT</h1>
+        <p class="editable" contenteditable="true">Jl. Kesehatan No. 123, Jakarta Selatan | Telp: (021) 555-1234</p>
+    </div>
+
+    <div class="content">
+        <h3 style="text-align: center; text-decoration: underline;" class="editable" contenteditable="true">SURAT KETERANGAN SAKIT</h3>
+        
+        <p>Yang bertanda tangan di bawah ini menerangkan bahwa:</p>
+        
+        <div class="meta-info">
+            <table>
+                <tr>
+                    <td class="label">Nama</td>
+                    <td>: <span class="editable" contenteditable="true">Budi Santoso</span></td>
+                </tr>
+                <tr>
+                    <td class="label">Umur</td>
+                    <td>: <span class="editable" contenteditable="true">25 Tahun</span></td>
+                </tr>
+                <tr>
+                    <td class="label">Pekerjaan</td>
+                    <td>: <span class="editable" contenteditable="true">Karyawan Swasta</span></td>
+                </tr>
+            </table>
+        </div>
+
+        <p class="editable" contenteditable="true">
+            Berdasarkan hasil pemeriksaan yang telah dilakukan, pasien tersebut dalam keadaan kurang sehat sehingga memerlukan istirahat selama <strong>2 (dua) hari</strong>, terhitung mulai tanggal <strong>24 September 2026</strong> sampai dengan <strong>25 September 2026</strong>.
+        </p>
+        
+        <p class="editable" contenteditable="true">
+            Demikian surat keterangan ini dibuat dengan sebenar-benarnya untuk dapat dipergunakan sebagaimana mestinya.
+        </p>
+    </div>
+
+    <div class="footer">
+        <p class="editable" contenteditable="true">Jakarta, 23 September 2026</p>
+        <p style="margin-bottom: 0;">Dokter Pemeriksa,</p>
+        <div class="signature-space"></div>
+        <p class="editable" contenteditable="true" style="font-weight: bold; text-decoration: underline;">dr. Ahmad Pratama</p>
+        <p class="editable" contenteditable="true" style="font-size: 14px; color: #666; margin-top: -10px;">SIP. 123.456/2025</p>
+    </div>
+</div>
+
+</body>
+</html>
